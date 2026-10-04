@@ -41,6 +41,8 @@ function shuffle<T>(arr: T[]): T[] {
   return out
 }
 
+const delay = (i: number) => ({ animationDelay: `${0.15 + Math.min(i, 12) * 0.05}s` })
+
 export const Gallery = ({ title, items }: { title: string; items: GalleryItem[] }) => {
   const [ratios, setRatios] = useState<Record<string, number>>({})
   const [shuffled] = useState(() => shuffle(items))
@@ -70,11 +72,12 @@ export const Gallery = ({ title, items }: { title: string; items: GalleryItem[] 
     <section className="gallery">
       <h1 className="gallery-title">{title}</h1>
       <div className="gallery-grid">
-        {shuffled.map((item) => (
+        {shuffled.map((item, i) => (
           <button
             key={item.id}
             type="button"
             className={spanFor(ratios[item.id])}
+            style={delay(i)}
             onClick={() => setSelected(item)}
           >
             {VIDEO_RE.test(item.src) ? (
@@ -101,7 +104,7 @@ export const Gallery = ({ title, items }: { title: string; items: GalleryItem[] 
           </button>
         ))}
         {placeholders.map((span, i) => (
-          <div key={`placeholder-${i}`} className={span} />
+          <div key={`placeholder-${i}`} className={span} style={delay(shuffled.length + i)} />
         ))}
       </div>
       {selected && (

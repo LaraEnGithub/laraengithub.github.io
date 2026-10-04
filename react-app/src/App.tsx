@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className='App'>
-      <Link to="/" id="home-logo">
+      <Link to="/" id="home-logo" className="glass">
         <img src={homeIcon} alt="Home" height="70" />
       </Link>
       <NavBar />

@@ -72,9 +72,15 @@
 #home-logo {
   position: fixed;
   top: 16px;
-  left: 16px;
+  left: 40px;
   z-index: 1060;
   display: inline-flex;
+  padding: 12px;
+  border-radius: 50%;
+
+  @media (max-width: 1024px) {
+    left: 20px;
+  }
 }
 
 .glass {
