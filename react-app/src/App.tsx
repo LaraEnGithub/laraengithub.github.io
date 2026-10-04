@@ -12,7 +12,8 @@ function App() {
       </a>
       <NavBar />
       <div id="center">
-        <h1>Hello World!</h1>
+        <h1 className="hero-title">Hello World!</h1>
+        <p className="subtitle">We ain't have no problem, Houston</p>
       </div>
     </div>
   )

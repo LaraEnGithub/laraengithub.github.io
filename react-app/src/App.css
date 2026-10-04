@@ -59,14 +59,16 @@
 #center {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
+  gap: 12px;
+  justify-content: flex-end;
   place-items: center;
   flex-grow: 1;
+  padding-top: 200px;
+  padding-bottom: 100px;
 
   @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
+    padding: 150px 20px 24px;
+    gap: 10px;
   }
 }
 

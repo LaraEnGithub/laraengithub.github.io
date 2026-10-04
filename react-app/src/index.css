@@ -52,7 +52,7 @@
 
 #root {
   text-align: center;
-  min-height: 200svh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -79,7 +79,10 @@
 
 .navbar.navbar-glass {
   width: 30%;
-  margin: 20px auto 0;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   border-radius: 24px;
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(20px) saturate(180%);
@@ -126,6 +129,18 @@ h2 {
   @media (max-width: 1024px) {
     font-size: 20px;
   }
+}
+
+.hero-title {
+  font-size: 96px;
+  @media (max-width: 1024px) {
+    font-size: 56px;
+  }
+}
+
+.subtitle {
+  font-family: 'Coral Pixels', var(--sans);
+  font-size: 30px;
 }
 p {
   margin: 0;
