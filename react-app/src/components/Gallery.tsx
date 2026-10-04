@@ -43,7 +43,7 @@ function shuffle<T>(arr: T[]): T[] {
 
 const delay = (i: number) => ({ animationDelay: `${0.15 + Math.min(i, 12) * 0.05}s` })
 
-export const Gallery = ({ title, items }: { title: string; items: GalleryItem[] }) => {
+export const Gallery = ({ items }: { items: GalleryItem[] }) => {
   const [ratios, setRatios] = useState<Record<string, number>>({})
   const [shuffled] = useState(() => shuffle(items))
   const [selected, setSelected] = useState<GalleryItem | null>(null)
@@ -69,14 +69,13 @@ export const Gallery = ({ title, items }: { title: string; items: GalleryItem[] 
   const placeholders = PLACEHOLDER_SPANS.slice(items.length)
 
   return (
-    <section className="gallery">
-      <h1 className="gallery-title">{title}</h1>
+    <>
       <div className="gallery-grid">
         {shuffled.map((item, i) => (
           <button
             key={item.id}
             type="button"
-            className={spanFor(ratios[item.id])}
+            className={ratios[item.id] ? spanFor(ratios[item.id]) : 'tile is-loading'}
             style={delay(i)}
             onClick={() => setSelected(item)}
           >
@@ -87,7 +86,7 @@ export const Gallery = ({ title, items }: { title: string; items: GalleryItem[] 
                 loop
                 autoPlay
                 playsInline
-                onLoadedMetadata={(e) =>
+                onLoadedData={(e) =>
                   measure(item.id, e.currentTarget.videoWidth, e.currentTarget.videoHeight)
                 }
               />
@@ -111,7 +110,7 @@ export const Gallery = ({ title, items }: { title: string; items: GalleryItem[] 
         <div className="lightbox" role="dialog" aria-modal="true">
           <button
             type="button"
-            className="lightbox-back glass"
+            className="lightbox-back"
             onClick={() => setSelected(null)}
             aria-label="Volver"
           >
@@ -135,6 +134,6 @@ export const Gallery = ({ title, items }: { title: string; items: GalleryItem[] 
           )}
         </div>
       )}
-    </section>
+    </>
   )
 }

@@ -1,25 +1,47 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-import { Routes, Route, Link } from 'react-router'
+import { Routes, Route, Navigate } from 'react-router'
+import { GitHubLink } from './components/GitHubLink'
 import { NavBar } from './components/NavBar'
-import homeIcon from './assets/home-icon.svg'
 import { Home } from './pages/Home'
-import { Fotos } from './pages/Fotos'
-import { ThreeD } from './pages/ThreeD'
+import { Galeria } from './pages/Galeria'
+import { UnderConstruction } from './pages/UnderConstruction'
+import { useLang } from './i18n/lang'
 
 function App() {
+  const { lang, setLang, t } = useLang()
 
   return (
-    <div className='App'>
-      <Link to="/" id="home-logo" className="glass">
-        <img src={homeIcon} alt="Home" height="70" />
-      </Link>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/fotos" element={<Fotos />} />
-        <Route path="/3d" element={<ThreeD />} />
-      </Routes>
+    <div className="shell">
+      <header className="shell-nav">
+        <NavBar />
+      </header>
+      <div className="shell-status">
+        <span className="status-dot" aria-hidden="true" />
+        <button
+          type="button"
+          className="lang-toggle"
+          onClick={() => setLang(lang === 'es' ? 'en' : 'es')}
+          aria-label={t('lang.switch')}
+        >
+          {lang === 'es' ? 'EN' : 'ES'}
+        </button>
+      </div>
+      <main className="shell-main">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/galeria/:collection?" element={<Galeria />} />
+          <Route path="/fotos" element={<Navigate to="/galeria/fotos" replace />} />
+          <Route path="/3d" element={<Navigate to="/galeria/3d" replace />} />
+          <Route path="/playground" element={<UnderConstruction />} />
+          <Route path="/musica" element={<UnderConstruction />} />
+        </Routes>
+      </main>
+      <aside className="shell-rail">
+        <GitHubLink />
+      </aside>
+      <footer className="shell-footer">
+        <GitHubLink />
+      </footer>
     </div>
   )
 }

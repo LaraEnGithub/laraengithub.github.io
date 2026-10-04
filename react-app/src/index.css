@@ -1,23 +1,16 @@
 :root {
-  --text: #fff;
-  --text-h: #fff;
   --bg: #000;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  --text: #fff;
+  --border: #fff;
+  --orange: #ff751f;
+  --purple: #250369;
+  --green: #7ed957;
 
-  --sans: 'Liter', system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: 'Liter', system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
+  --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  --pixel: 'Press Start 2P', var(--mono);
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
+  font: 18px/145% var(--mono);
+  color-scheme: dark;
   color: var(--text);
   background: var(--bg);
   font-synthesis: none;
@@ -30,24 +23,10 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #fff;
-    --text-h: #fff;
-    --bg: #000;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 #root {
@@ -56,59 +35,9 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  font-family: var(--sans);
+  font-family: var(--mono);
   background: var(--bg);
   color: var(--text);
-}
-
-@media (min-width: 992px) {
-  .navbar-center-links {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
-#home-logo {
-  position: fixed;
-  top: 16px;
-  left: 40px;
-  z-index: 1060;
-  display: inline-flex;
-  padding: 12px;
-  border-radius: 50%;
-
-  @media (max-width: 1024px) {
-    left: 20px;
-  }
-}
-
-.glass {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: url(#glass-distortion) blur(4px) saturate(180%);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.25),
-    inset 1px 1px 2px rgba(255, 255, 255, 0.3),
-    inset -1px -2px 2px rgba(255, 255, 255, 0.15),
-    inset 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-.navbar.navbar-glass {
-  width: 30%;
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1030;
-  border-radius: 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  --bs-navbar-color: #fff;
-  --bs-navbar-hover-color: #fff;
-  --bs-navbar-active-color: #fff;
-  --bs-navbar-brand-color: #fff;
-  --bs-navbar-brand-hover-color: #fff;
 }
 
 body {
@@ -117,14 +46,12 @@ body {
 
 h1,
 h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+  font-family: var(--pixel);
+  font-weight: 400;
 }
 
 h1 {
   font-size: 56px;
-  letter-spacing: -1.68px;
   margin: 32px 0;
   @media (max-width: 1024px) {
     font-size: 36px;
@@ -134,7 +61,6 @@ h1 {
 h2 {
   font-size: 24px;
   line-height: 118%;
-  letter-spacing: -0.24px;
   margin: 0 0 8px;
   @media (max-width: 1024px) {
     font-size: 20px;
@@ -142,44 +68,38 @@ h2 {
 }
 
 .hero-title {
-  font-size: 96px;
+  margin: 0;
+  color: var(--orange);
+  font-size: clamp(28px, 4.2vw, 84px);
+  line-height: 1.25;
+}
+
+.hero-subtitle {
+  margin-top: 24px;
+  font-size: 24px;
+  animation: fade-in-down 0.8s ease-out both;
+
   @media (max-width: 1024px) {
-    font-size: 56px;
+    font-size: 16px;
   }
 }
 
-.subtitle {
-  font-family: 'Coral Pixels', var(--sans);
-  font-size: 30px;
+.typewriter-rest {
+  visibility: hidden;
 }
 
-#song-widget {
-  width: 300px;
-  height: 300px;
-  border-radius: 12px;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
-}
-
-#song-widget iframe {
-  width: 100%;
-  height: 100%;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
   border: 0;
 }
+
 p {
   margin: 0;
-}
-
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
-
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
 }

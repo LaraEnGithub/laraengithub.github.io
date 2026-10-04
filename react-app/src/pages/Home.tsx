@@ -1,17 +1,33 @@
-export const Home = () => (
-  <div id="center">
-    <h1 className="hero-title">Hello World!</h1>
-    <p className="subtitle">We ain't have no problem, Houston</p>
-    <div id="song-widget">
-      <iframe
-        width="300"
-        height="300"
-        src="https://www.youtube.com/embed/a5uQMwRMHcs"
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-      ></iframe>
+import { HomeSide } from '../components/HomeSide'
+import { SiteGraph } from '../components/SiteGraph'
+import { Typewriter } from '../components/Typewriter'
+import { useLang } from '../i18n/lang'
+
+const TYPE_SPEED = 90
+
+export const Home = () => {
+  const { t } = useLang()
+  const title = t('home.title')
+
+  return (
+    <div className="home">
+      <div className="home-main">
+        <h1 className="hero-title">
+          <Typewriter key={title} text={title} speed={TYPE_SPEED} />
+        </h1>
+        <p
+          key={`${title}-subtitle`}
+          className="hero-subtitle"
+          style={{ animationDelay: `${title.length * TYPE_SPEED}ms` }}
+        >
+          {t('home.subtitle')}
+        </p>
+        <SiteGraph
+          key={`${title}-graph`}
+          style={{ animationDelay: `${title.length * TYPE_SPEED + 300}ms` }}
+        />
+      </div>
+      <HomeSide />
     </div>
-  </div>
-)
+  )
+}
