@@ -1,6 +1,6 @@
 .shell {
   display: grid;
-  grid-template-columns: 1fr 132px;
+  grid-template-columns: minmax(0, 1fr) 132px;
   grid-template-rows: 50px 1fr 50px;
   grid-template-areas:
     'nav status'
@@ -9,7 +9,7 @@
   height: 100svh;
 
   @media (max-width: 1024px) {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-rows: 50px 1fr auto;
     grid-template-areas:
       'nav status'
@@ -32,6 +32,10 @@
   min-width: 110px;
   border-bottom: 1px solid var(--border);
   border-left: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    min-width: 88px;
+  }
 }
 
 .site-nav {
@@ -63,6 +67,11 @@
   height: 24px;
   border-radius: 50%;
   background: var(--green);
+
+  @media (max-width: 1024px) {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 .lang-toggle {
@@ -73,6 +82,10 @@
   font: inherit;
   font-size: 22px;
   cursor: pointer;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
 }
 
 .lang-toggle:hover {
@@ -138,11 +151,11 @@
 
 .home {
   display: grid;
-  grid-template-columns: 1fr 380px;
+  grid-template-columns: minmax(0, 1fr) 380px;
   height: 100%;
 
   @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     height: auto;
   }
 }
@@ -177,6 +190,10 @@
   font-size: 24px;
   line-height: 1.4;
   user-select: none;
+
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
 }
 
 .side-random {
@@ -189,6 +206,11 @@
   line-height: 1.2;
   padding: 20px 24px;
   cursor: pointer;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+    padding: 16px 20px;
+  }
 }
 
 .side-random:hover {
@@ -197,6 +219,10 @@
 
 .side-song {
   padding: 24px 40px;
+
+  @media (max-width: 1024px) {
+    padding: 20px;
+  }
 }
 
 .side-song iframe {
@@ -214,6 +240,10 @@
 
 .side-song-label {
   font-size: 24px;
+
+  @media (max-width: 1024px) {
+    font-size: 18px;
+  }
 }
 
 .side-see-all {
@@ -239,6 +269,7 @@
 
   @media (max-width: 1024px) {
     padding: 32px 20px;
+    min-height: calc(100svh - 50px);
   }
 }
 
