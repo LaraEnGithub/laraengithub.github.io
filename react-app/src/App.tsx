@@ -4,6 +4,7 @@ import { GitHubLink } from './components/GitHubLink'
 import { NavBar } from './components/NavBar'
 import { Home } from './pages/Home'
 import { Galeria } from './pages/Galeria'
+import { Musica } from './pages/Musica'
 import { UnderConstruction } from './pages/UnderConstruction'
 import { useLang } from './i18n/lang'
 
@@ -33,7 +34,7 @@ function App() {
           <Route path="/fotos" element={<Navigate to="/galeria/fotos" replace />} />
           <Route path="/3d" element={<Navigate to="/galeria/3d" replace />} />
           <Route path="/playground" element={<UnderConstruction />} />
-          <Route path="/musica" element={<UnderConstruction />} />
+          <Route path="/musica" element={<Musica />} />
         </Routes>
       </main>
       <aside className="shell-rail">

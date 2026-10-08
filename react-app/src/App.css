@@ -286,7 +286,10 @@
 
 .gallery-title,
 .gallery-tabs,
-.gallery-grid > * {
+.gallery-grid > *,
+.music-title,
+.music-subtitle,
+.song-row {
   animation: fade-in-down 0.8s ease-out both;
 }
 
@@ -358,6 +361,9 @@
   .gallery-title,
   .gallery-tabs,
   .gallery-grid > *,
+  .music-title,
+  .music-subtitle,
+  .song-row,
   .tile.is-loading::after,
   .gallery-tabs a.active::after,
   .cursor {
@@ -415,6 +421,57 @@
   min-height: 100%;
   padding: 80px 20px;
   font-size: 24px;
+}
+
+.music {
+  padding: 40px;
+  text-align: left;
+
+  @media (max-width: 1024px) {
+    padding: 20px;
+  }
+}
+
+.music-title {
+  margin: 0 0 24px;
+}
+
+.music-subtitle {
+  margin: 0 0 32px;
+}
+
+.song-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.song-row {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+
+  @media (max-width: 640px) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}
+
+.song-name {
+  overflow-wrap: anywhere;
+}
+
+.song-row a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.song-row a:hover {
+  color: var(--orange);
 }
 
 .gallery-grid {

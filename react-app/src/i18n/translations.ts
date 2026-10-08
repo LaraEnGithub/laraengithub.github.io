@@ -13,6 +13,7 @@ export const es = {
   'side.random': 'Llévame a algún lugar interesante',
   'side.songOfTheDay': 'Canción del día',
   'side.seeAll': 'VER TODAS',
+  'music.songsOfTheDay': 'Canciones del día',
 }
 
 export const en: typeof es = {
@@ -30,6 +31,7 @@ export const en: typeof es = {
   'side.random': 'Take me somewhere interesting',
   'side.songOfTheDay': 'Song of the day',
   'side.seeAll': 'SEE ALL',
+  'music.songsOfTheDay': 'Songs of the day',
 }
 
 export type TranslationKey = keyof typeof es
