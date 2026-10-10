@@ -9,6 +9,7 @@ export const SITE_MAP: SiteSection[] = [
   { id: 'musica', path: '/musica', label: 'nav.music', parent: 'home' },
   { id: 'fotos', path: '/galeria/fotos', label: 'graph.photos', parent: 'galeria' },
   { id: '3d', path: '/galeria/3d', label: 'graph.3d', parent: 'galeria' },
+  { id: 'conway', path: '/playground/conway', label: 'graph.conway', parent: 'playground' },
 ]
 
 export const LEAF_SECTIONS = SITE_MAP.filter((s) => !SITE_MAP.some((other) => other.parent === s.id))

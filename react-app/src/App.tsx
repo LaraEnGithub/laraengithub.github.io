@@ -5,7 +5,7 @@ import { NavBar } from './components/NavBar'
 import { Home } from './pages/Home'
 import { Galeria } from './pages/Galeria'
 import { Musica } from './pages/Musica'
-import { UnderConstruction } from './pages/UnderConstruction'
+import { Playground } from './pages/Playground'
 import { useLang } from './i18n/lang'
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
           <Route path="/galeria/:collection?" element={<Galeria />} />
           <Route path="/fotos" element={<Navigate to="/galeria/fotos" replace />} />
           <Route path="/3d" element={<Navigate to="/galeria/3d" replace />} />
-          <Route path="/playground" element={<UnderConstruction />} />
+          <Route path="/playground/:game?" element={<Playground />} />
           <Route path="/musica" element={<Musica />} />
         </Routes>
       </main>

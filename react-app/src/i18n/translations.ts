@@ -10,10 +10,15 @@ export const es = {
   'graph.label': 'Mapa del sitio',
   'graph.photos': 'Fotos',
   'graph.3d': '3D',
+  'graph.conway': 'Juego de la vida',
   'side.random': 'Llévame a algún lugar interesante',
   'side.songOfTheDay': 'Canción del día',
   'side.seeAll': 'VER TODAS',
   'music.songsOfTheDay': 'Canciones del día',
+  'life.play': 'Play',
+  'life.pause': 'Pausa',
+  'life.reset': 'Reiniciar',
+  'life.clear': 'Borrar',
 }
 
 export const en: typeof es = {
@@ -28,10 +33,15 @@ export const en: typeof es = {
   'graph.label': 'Site map',
   'graph.photos': 'Photos',
   'graph.3d': '3D',
+  'graph.conway': 'Game of Life',
   'side.random': 'Take me somewhere interesting',
   'side.songOfTheDay': 'Daily song',
   'side.seeAll': 'SEE ALL',
   'music.songsOfTheDay': 'Daily song',
+  'life.play': 'Play',
+  'life.pause': 'Pause',
+  'life.reset': 'Reset',
+  'life.clear': 'Clear',
 }
 
 export type TranslationKey = keyof typeof es
