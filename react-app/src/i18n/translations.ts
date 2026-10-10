@@ -29,9 +29,9 @@ export const en: typeof es = {
   'graph.photos': 'Photos',
   'graph.3d': '3D',
   'side.random': 'Take me somewhere interesting',
-  'side.songOfTheDay': 'Song of the day',
+  'side.songOfTheDay': 'Daily song',
   'side.seeAll': 'SEE ALL',
-  'music.songsOfTheDay': 'Songs of the day',
+  'music.songsOfTheDay': 'Daily song',
 }
 
 export type TranslationKey = keyof typeof es
