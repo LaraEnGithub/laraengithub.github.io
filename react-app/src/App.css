@@ -218,11 +218,7 @@
 }
 
 .side-song {
-  padding: 24px 40px;
-
-  @media (max-width: 1024px) {
-    padding: 20px;
-  }
+  padding: 0;
 }
 
 .side-song iframe {
