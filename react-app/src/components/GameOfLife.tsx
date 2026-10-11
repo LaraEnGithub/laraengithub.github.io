@@ -25,17 +25,21 @@ const createBoard = (): Board => ({
 
 const step = (board: Board) => {
   const { cells, next } = board
+  let changed = false
   for (let y = 1; y <= SIZE; y++) {
     for (let i = y * W + 1, end = i + SIZE; i < end; i++) {
       const n =
         cells[i - W - 1] + cells[i - W] + cells[i - W + 1] +
         cells[i - 1] + cells[i + 1] +
         cells[i + W - 1] + cells[i + W] + cells[i + W + 1]
-      next[i] = n === 3 || (n === 2 && cells[i]) ? 1 : 0
+      const alive = n === 3 || (n === 2 && cells[i]) ? 1 : 0
+      if (alive !== cells[i]) changed = true
+      next[i] = alive
     }
   }
   board.cells = next
   board.next = cells
+  return changed
 }
 
 export const GameOfLife = () => {
@@ -168,7 +172,10 @@ export const GameOfLife = () => {
   useEffect(() => {
     if (!running) return
     const id = setInterval(() => {
-      step(board)
+      if (!step(board)) {
+        setRunning(false)
+        return
+      }
       setGeneration((g) => g + 1)
       redrawRef.current()
     }, STEP_MS)
@@ -196,7 +203,7 @@ export const GameOfLife = () => {
 
   const stepOnce = () => {
     saveInitial()
-    step(board)
+    if (!step(board)) return
     setGeneration((g) => g + 1)
     redrawRef.current()
   }
