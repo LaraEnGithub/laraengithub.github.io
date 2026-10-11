@@ -19,6 +19,10 @@ export const es = {
   'life.pause': 'Pausa',
   'life.reset': 'Reiniciar',
   'life.clear': 'Borrar',
+  'life.expand': 'Pantalla completa',
+  'life.collapse': 'Salir',
+  'life.step': 'Siguiente generación',
+  'life.generation': 'Generación',
 }
 
 export const en: typeof es = {
@@ -42,6 +46,10 @@ export const en: typeof es = {
   'life.pause': 'Pause',
   'life.reset': 'Reset',
   'life.clear': 'Clear',
+  'life.expand': 'Fullscreen',
+  'life.collapse': 'Exit',
+  'life.step': 'Next generation',
+  'life.generation': 'Generation',
 }
 
 export type TranslationKey = keyof typeof es

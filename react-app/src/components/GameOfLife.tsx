@@ -40,10 +40,13 @@ const step = (board: Board) => {
 
 export const GameOfLife = () => {
   const { t } = useLang()
+  const containerRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const redrawRef = useRef(() => {})
   const [board] = useState(createBoard)
   const [running, setRunning] = useState(false)
+  const [expanded, setExpanded] = useState(false)
+  const [generation, setGeneration] = useState(0)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -166,21 +169,41 @@ export const GameOfLife = () => {
     if (!running) return
     const id = setInterval(() => {
       step(board)
+      setGeneration((g) => g + 1)
       redrawRef.current()
     }, STEP_MS)
     return () => clearInterval(id)
   }, [running, board])
 
-  const togglePlay = () => {
-    if (!running && !board.started) {
-      board.initial.set(board.cells)
-      board.started = true
+  useEffect(() => {
+    const onFullscreenChange = () => {
+      if (!document.fullscreenElement) setExpanded(false)
     }
+    document.addEventListener('fullscreenchange', onFullscreenChange)
+    return () => document.removeEventListener('fullscreenchange', onFullscreenChange)
+  }, [])
+
+  const saveInitial = () => {
+    if (board.started) return
+    board.initial.set(board.cells)
+    board.started = true
+  }
+
+  const togglePlay = () => {
+    if (!running) saveInitial()
     setRunning(!running)
+  }
+
+  const stepOnce = () => {
+    saveInitial()
+    step(board)
+    setGeneration((g) => g + 1)
+    redrawRef.current()
   }
 
   const reset = () => {
     setRunning(false)
+    setGeneration(0)
     if (board.started) board.cells.set(board.initial)
     board.started = false
     redrawRef.current()
@@ -188,26 +211,61 @@ export const GameOfLife = () => {
 
   const clear = () => {
     setRunning(false)
+    setGeneration(0)
     board.cells.fill(0)
     board.initial.fill(0)
     board.started = false
     redrawRef.current()
   }
 
+  const toggleExpanded = () => {
+    if (expanded) {
+      if (document.fullscreenElement) document.exitFullscreen()
+    } else {
+      containerRef.current?.requestFullscreen?.().catch(() => {})
+    }
+    setExpanded(!expanded)
+  }
+
   return (
-    <div className="life">
+    <div ref={containerRef} className={expanded ? 'life is-expanded' : 'life'}>
       <div className="life-controls">
-        <button type="button" className={running ? 'is-running' : undefined} onClick={togglePlay}>
-          {running ? t('life.pause') : t('life.play')}
+        <button
+          type="button"
+          className={running ? 'is-running' : undefined}
+          onClick={togglePlay}
+          aria-label={running ? t('life.pause') : t('life.play')}
+          title={running ? t('life.pause') : t('life.play')}
+        >
+          {running ? '❚❚' : '▶︎'}
         </button>
-        <button type="button" onClick={reset}>
-          {t('life.reset')}
+        <button type="button" onClick={stepOnce} disabled={running} aria-label={t('life.step')} title={t('life.step')}>
+          →
         </button>
-        <button type="button" onClick={clear}>
-          {t('life.clear')}
+        <button type="button" onClick={reset} aria-label={t('life.reset')} title={t('life.reset')}>
+          ↺
         </button>
+        <button type="button" onClick={clear} aria-label={t('life.clear')} title={t('life.clear')}>
+          ⌫
+        </button>
+        <span className="life-generation">
+          {t('life.generation')}: {generation}
+        </span>
       </div>
-      <canvas ref={canvasRef} className="life-canvas" aria-label={t('graph.conway')} />
+      <div className="life-board">
+        <div className="life-frame">
+          <canvas ref={canvasRef} className="life-canvas" aria-label={t('graph.conway')} />
+          <button
+            type="button"
+            className="life-expand"
+            onClick={toggleExpanded}
+            aria-label={expanded ? t('life.collapse') : t('life.expand')}
+            title={expanded ? t('life.collapse') : t('life.expand')}
+          >
+            {expanded ? '✕' : '⛶'}
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

@@ -443,20 +443,35 @@
 .life-controls {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 16px;
 }
 
-.life-controls button {
+.life-controls button,
+.life-expand {
   border: 1px solid var(--border);
-  background: none;
+  background: var(--bg);
   color: var(--text);
   font: inherit;
-  padding: 8px 24px;
+  font-size: 22px;
+  line-height: 1;
+  width: 56px;
+  height: 48px;
   cursor: pointer;
 }
 
-.life-controls button:hover {
+.life-controls button:hover:not(:disabled),
+.life-expand:hover {
   color: var(--orange);
+}
+
+.life-controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.life-generation {
+  margin-left: 8px;
 }
 
 .life-controls button.is-running {
@@ -464,13 +479,59 @@
   color: var(--bg);
 }
 
+.life-board {
+  flex: 1;
+  min-height: 320px;
+  container-type: size;
+
+  @media (max-width: 1024px) {
+    flex: none;
+    container-type: normal;
+  }
+}
+
+.life-frame {
+  position: relative;
+  width: min(100cqw, 100cqh);
+  aspect-ratio: 1;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+}
+
 .life-canvas {
   display: block;
-  flex: 1;
   width: 100%;
-  min-height: 60svh;
+  height: 100%;
   border: 1px solid var(--border);
   cursor: crosshair;
+}
+
+.life-expand {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+
+.life.is-expanded {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  padding: 20px;
+  background: var(--bg);
+}
+
+.life.is-expanded .life-board {
+  flex: 1;
+  min-height: 0;
+  container-type: size;
+  display: grid;
+  place-items: center;
+}
+
+.life.is-expanded .life-frame {
+  width: min(100cqw, 100cqh);
 }
 
 @keyframes blink {
