@@ -128,7 +128,8 @@ export const GameOfLife = () => {
       .on('zoom', requestDraw)
     selection.call(zoomBehavior).on('dblclick.zoom', null)
 
-    let centered = false
+    let prevW = 0
+    let prevH = 0
     const resize = () => {
       const w = canvas.clientWidth
       const h = canvas.clientHeight
@@ -137,15 +138,19 @@ export const GameOfLife = () => {
       canvas.width = Math.round(w * dpr)
       canvas.height = Math.round(h * dpr)
       zoomBehavior.scaleExtent([Math.min(w, h) / SIZE, MAX_CELL_PX])
-      if (centered) {
-        selection.call(zoomBehavior.scaleBy, 1)
+      if (prevW) {
+        const { k } = zoomTransform(canvas)
+        selection
+          .call(zoomBehavior.translateBy, (w - prevW) / 2 / k, (h - prevH) / 2 / k)
+          .call(zoomBehavior.scaleBy, 1)
       } else {
-        centered = true
         selection.call(
           zoomBehavior.transform,
           zoomIdentity.translate(w / 2, h / 2).scale(INITIAL_CELL_PX).translate(-SIZE / 2, -SIZE / 2),
         )
       }
+      prevW = w
+      prevH = h
       requestDraw()
     }
     const observer = new ResizeObserver(resize)

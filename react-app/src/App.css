@@ -518,20 +518,44 @@
   position: fixed;
   inset: 0;
   z-index: 2000;
-  padding: 20px;
   background: var(--bg);
 }
 
 .life.is-expanded .life-board {
-  flex: 1;
+  position: absolute;
+  inset: 0;
   min-height: 0;
-  container-type: size;
-  display: grid;
-  place-items: center;
+  container-type: normal;
 }
 
 .life.is-expanded .life-frame {
-  width: min(100cqw, 100cqh);
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+}
+
+.life.is-expanded .life-canvas {
+  border: 0;
+}
+
+.life.is-expanded .life-expand {
+  top: 16px;
+  bottom: auto;
+  right: 16px;
+}
+
+.life.is-expanded .life-controls {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  z-index: 1;
+  translate: -50% 0;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  justify-content: center;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  background: var(--bg);
 }
 
 @keyframes blink {
