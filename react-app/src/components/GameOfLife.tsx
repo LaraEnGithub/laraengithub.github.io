@@ -14,13 +14,12 @@ const ALIVE_PIXEL = 0xff1f75ff
 const GRID_COLOR = 'rgba(255, 255, 255, 0.15)'
 const BORDER_COLOR = '#fff'
 
-type Board = { cells: Uint8Array; next: Uint8Array; initial: Uint8Array; started: boolean }
+type Board = { cells: Uint8Array; next: Uint8Array; initial: Uint8Array }
 
 const createBoard = (): Board => ({
   cells: new Uint8Array(W * W),
   next: new Uint8Array(W * W),
   initial: new Uint8Array(W * W),
-  started: false,
 })
 
 const step = (board: Board) => {
@@ -196,9 +195,7 @@ export const GameOfLife = () => {
   }, [])
 
   const saveInitial = () => {
-    if (board.started) return
-    board.initial.set(board.cells)
-    board.started = true
+    if (generation === 0) board.initial.set(board.cells)
   }
 
   const togglePlay = () => {
@@ -216,8 +213,7 @@ export const GameOfLife = () => {
   const reset = () => {
     setRunning(false)
     setGeneration(0)
-    if (board.started) board.cells.set(board.initial)
-    board.started = false
+    if (generation > 0) board.cells.set(board.initial)
     redrawRef.current()
   }
 
@@ -225,8 +221,6 @@ export const GameOfLife = () => {
     setRunning(false)
     setGeneration(0)
     board.cells.fill(0)
-    board.initial.fill(0)
-    board.started = false
     redrawRef.current()
   }
 
