@@ -5,8 +5,8 @@ export const SONGS: Song[] = [
   { date: '2026-10-08', youtubeId: '2jna3dWEnzo', artist: 'The Strokes', title: 'Brooklyn Bridge To Chorus' },
   { date: '2026-10-09', youtubeId: '1elgQ-zSYKU', artist: 'PANTERA BLUE', title: 'Anticuada' },
   { date: '2026-10-10', youtubeId: 'Ty9Pcg3qrmU', artist: 'Fontaines D.C.', title: 'I Love You' },
-  { date: '2026-10-11', youtubeId: 'InyT9Gyoz_o', artist: 'Max Richter.', title: 'On The Nature Of Daylight' },
+  { date: '2026-10-11', youtubeId: 'InyT9Gyoz_o', artist: 'Max Richter', title: 'On The Nature Of Daylight' },
+  { date: '2026-10-12', youtubeId: 'PEM0Vs8jf1w', artist: 'JVKE', title: 'golden hour' },
 ]
-
-
+  
 export const currentSong = SONGS.reduce((latest, song) => (song.date > latest.date ? song : latest))
