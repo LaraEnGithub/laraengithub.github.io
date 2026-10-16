@@ -9,6 +9,7 @@ export const SONGS: Song[] = [
   { date: '2026-10-12', youtubeId: 'PEM0Vs8jf1w', artist: 'JVKE', title: 'golden hour' },
   { date: '2026-10-13', youtubeId: 'KvMY1uzSC1E', artist: 'Rosa Walton, Hallie Coggins', title: 'I Really Want to Stay at Your House' },
   { date: '2026-10-14', youtubeId: 'yS2KyK3pqj4', artist: 'Matt Maltese', title: 'As the World Caves In' },
+  { date: '2026-10-15', youtubeId: 'H7-7TXXnw8I', artist: 'Bad Bunny', title: 'TURiSTA' },
 ]
   
 export const currentSong = SONGS.reduce((latest, song) => (song.date > latest.date ? song : latest))
